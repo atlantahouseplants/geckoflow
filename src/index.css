@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gecko-green: #22c55e;
+  --color-gecko-green-dark: #16a34a;
+  --color-gecko-green-light: #86efac;
+}
+
+/* Custom styles */
+html, body, #root {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+}
+
+/* Prevent pull-to-refresh on mobile */
+body {
+  overscroll-behavior-y: contain;
+}
+
+/* Large touch targets */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Camera preview container */
+.camera-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.camera-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Capture button animation */
+@keyframes capture-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.capture-btn:active {
+  animation: capture-pulse 0.15s ease-in-out;
+}
+
+/* Success celebration animation */
+@keyframes celebrate {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.celebrate {
+  animation: celebrate 0.5s ease-out;
+}
+
+/* Slide transitions */
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-100%); opacity: 0; }
+}
+
+/* Smooth page transitions */
+.page-enter {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Photo thumbnail strip */
+.thumbnail-strip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.thumbnail-strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* Status badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-pending { background: #fef3c7; color: #92400e; }
+.badge-processing { background: #dbeafe; color: #1e40af; }
+.badge-complete { background: #dcfce7; color: #166534; }
+.badge-failed { background: #fee2e2; color: #991b1b; }
+
+/* Toggle switch */
+.toggle {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  background: #e5e7eb;
+  border-radius: 9999px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.toggle.active {
+  background: #22c55e;
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggle.active::after {
+  transform: translateX(24px);
+}
+
+/* Loading spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Segmented control */
+.segmented-control {
+  display: flex;
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.segmented-control button {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  color: #6b7280;
+}
+
+.segmented-control button.active {
+  background: white;
+  color: #111827;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Swipeable carousel */
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+}
